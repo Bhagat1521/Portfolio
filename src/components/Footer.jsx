@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer style={styles.footer}>
-      © {new Date().getFullYear()} Bhagat Shinde — Built with React
+      © {new Date().getFullYear()} Bhagat Shinde
     </footer>
   );
 }
