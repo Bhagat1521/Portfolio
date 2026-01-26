@@ -81,7 +81,7 @@ const styles = {
     gridTemplateColumns: "1.2fr 1fr",
     alignItems: "center",
     minHeight: "calc(100vh - 70px)",
-    gap: "60px",
+    // gap: "8px",
   },
 
   title: {
