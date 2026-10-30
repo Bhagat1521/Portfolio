@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 export default function Contact() {
-  return <h2>Contact</h2>;
+  return <Navigate to="/#contact" replace />;
 }

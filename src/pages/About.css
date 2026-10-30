@@ -1,0 +1,317 @@
+:root {
+  --about-background: #0f1020;
+  --about-panel: rgba(255, 255, 255, 0.035);
+  --about-border: rgba(255, 255, 255, 0.1);
+  --about-text: #f8fafc;
+  --about-muted: #a7afc2;
+  --about-purple: #8b5cf6;
+  --about-cyan: #22d3ee;
+}
+
+.about-page {
+  min-height: calc(100vh - 70px);
+  overflow: hidden;
+  padding: clamp(48px, 7vw, 88px) 0 96px;
+  color: var(--about-text);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(124, 58, 237, 0.2), transparent 32%),
+    radial-gradient(circle at 88% 28%, rgba(34, 211, 238, 0.11), transparent 31%),
+    linear-gradient(145deg, #0f1020 0%, #121426 55%, #17182b 100%);
+}
+
+.about-container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.about-header,
+.skills-header {
+  text-align: center;
+}
+
+.about-kicker,
+.about-eyebrow {
+  margin: 0 0 12px;
+  color: var(--about-cyan);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.about-title,
+.skills-title {
+  margin: 0;
+  background: linear-gradient(90deg, var(--about-purple), var(--about-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+}
+
+.about-subtitle,
+.skills-subtitle {
+  margin: 16px auto 0;
+  color: var(--about-muted);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+}
+
+.about-subtitle span {
+  padding: 0 8px;
+  color: var(--about-purple);
+}
+
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  align-items: center;
+  gap: clamp(28px, 6vw, 84px);
+  margin-top: clamp(42px, 7vw, 76px);
+}
+
+.about-content h2 {
+  max-width: 620px;
+  margin: 0 0 24px;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1.15;
+}
+
+.about-description {
+  max-width: 650px;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.about-description strong {
+  color: #d9ccff;
+  font-weight: 600;
+}
+
+.about-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-highlights li {
+  padding: 10px 14px;
+  border: 1px solid rgba(139, 92, 246, 0.32);
+  border-radius: 999px;
+  color: #dbeafe;
+  background: rgba(139, 92, 246, 0.08);
+  font-size: 0.84rem;
+}
+
+.about-image-wrapper {
+  position: relative;
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  isolation: isolate;
+}
+
+.about-image {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 410px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 50px rgba(124, 58, 237, 0.35));
+  animation: profileFloat 5s ease-in-out infinite;
+}
+
+.image-glow {
+  position: absolute;
+  z-index: -1;
+  width: 72%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(45px);
+}
+
+.image-glow-purple {
+  background: rgba(124, 58, 237, 0.25);
+  transform: translate(-15%, 12%);
+}
+
+.image-glow-cyan {
+  background: rgba(34, 211, 238, 0.17);
+  transform: translate(22%, -14%);
+}
+
+.skills-section {
+  margin-top: clamp(55px, 9vw, 75px);
+}
+
+.skills-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.skills-marquee {
+  display: grid;
+  gap: 16px;
+  width: 100vw;
+  margin: 42px 0 0;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+.skills-row {
+  overflow: hidden;
+  padding: 6px 0;
+  contain: layout paint;
+}
+
+.skills-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.skills-row-right .skills-track {
+  animation: skillsFirstCycle 30s linear infinite;
+}
+
+.skills-row-left .skills-track {
+  animation: skillsSecondCycle 30s linear infinite;
+}
+
+.skills-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 14px;
+  margin: 0;
+  padding: 0 7px;
+  list-style: none;
+}
+
+.skill-card {
+  display: flex;
+  min-width: 176px;
+  min-height: 70px;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  padding: 14px 24px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 14px;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.skill-icon {
+  display: inline-grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border: 1px solid rgba(34, 211, 238, 0.38);
+  border-radius: 9px;
+  color: #67e8f9;
+  background: rgba(34, 211, 238, 0.08);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.skill-card:hover {
+  border-color: rgba(34, 211, 238, 0.6);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.15);
+  transform: translateY(-2px);
+}
+
+@keyframes profileFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes skillsFirstCycle {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes skillsSecondCycle {
+  0% { transform: translateX(-50%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 900px) {
+  .about-hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+    gap: 28px;
+  }
+
+  .about-image-wrapper {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-page {
+    padding-top: 42px;
+  }
+
+  .about-container {
+    width: min(100% - 24px, 1200px);
+  }
+
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .about-content h2 {
+    font-size: 1.7rem;
+  }
+
+  .about-description {
+    font-size: 0.94rem;
+    line-height: 1.72;
+  }
+
+  .about-highlights {
+    justify-content: center;
+  }
+
+  .about-image-wrapper {
+    min-height: 220px;
+    order: 2;
+  }
+
+  .about-image {
+    width: min(100%, 280px);
+  }
+
+  .skills-marquee {
+    margin-top: 32px;
+  }
+
+  .skill-card {
+    min-width: 155px;
+    min-height: 64px;
+    padding: 11px 17px;
+    font-size: 0.9rem;
+  }
+
+  .skill-icon {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-image,
+  .skills-track {
+    animation: none;
+  }
+}

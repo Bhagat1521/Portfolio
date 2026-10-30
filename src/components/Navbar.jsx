@@ -1,45 +1,75 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { navLinks, site } from "../data/site";
+
+function isActive(to, pathname, hash) {
+  if (to === "/resume") return pathname === "/resume";
+  if (to === "/services") return pathname === "/services";
+  if (!to.startsWith("/#")) return pathname === to;
+
+  const targetHash = to.slice(1);
+  if (pathname !== "/") return false;
+  if (targetHash === "#home") return !hash || hash === "#home";
+  return hash === targetHash;
+}
 
 export default function Navbar() {
-  return (
-    <header style={styles.header}>
-      <div className="container" style={styles.nav}>
-        <h2 style={styles.logo}>Bhagat.dev</h2>
+  const { pathname, hash } = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-        <nav style={styles.links}>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/projects">Projects</Link>
-          <Link to="/contact">Contact</Link>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <header id="hd" className={scrolled ? "s" : ""}>
+      <div className="wrap nav">
+        <Link to="/#home" className="brand" onClick={() => setOpen(false)}>
+          {site.brand}
+          <span style={{ color: "var(--lav)" }}>{site.brandSuffix}</span>
+        </Link>
+
+        <nav className={`links${open ? " o" : ""}`} id="lk" aria-label="Main navigation">
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`${link.mobileOnly ? "m" : ""}${isActive(link.to, pathname, hash) ? " act" : ""}`.trim()}
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
+
+        <div className="rt">
+          <Link className="btn p navcta" to="/#contact">
+            Contact ↗
+          </Link>
+          <button
+            className={`burger${open ? " o" : ""}`}
+            type="button"
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <i />
+            <i />
+          </button>
+        </div>
       </div>
     </header>
   );
 }
-
-const styles = {
-  header: {
-    background: "#0b0f19",
-    borderBottom: "1px solid #1f2937",
-    position: "sticky",
-    top: 0,
-    zIndex: 100,
-  },
-  nav: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "70px",
-  },
-  logo: {
-    fontWeight: 700,
-    background: "var(--accent)",
-    WebkitBackgroundClip: "text",
-    color: "transparent",
-  },
-  links: {
-    display: "flex",
-    gap: "24px",
-    color: "#9ca3af",
-  },
-};

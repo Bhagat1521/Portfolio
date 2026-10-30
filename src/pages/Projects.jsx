@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 export default function Projects() {
-  return <h2>Projects</h2>;
+  return <Navigate to="/#projects" replace />;
 }

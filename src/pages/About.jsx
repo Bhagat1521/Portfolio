@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 export default function About() {
-  return <h2>About Me</h2>;
+  return <Navigate to="/#about" replace />;
 }
